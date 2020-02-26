@@ -11,9 +11,12 @@ function [ D,P ] = participation_matrix( A,C )
 %           P - participation matrix (scales D by the number of potential neighbours and normalises it)
 %
 % Florian Klimm Oxford/HU Berlin 2014/15
+%
+% Klimm, F. et al.: Individual nodeʼs contribution to the mesoscale of complex networks.
+% New Journal of Physics, 16(12), 125006.
 
 % number of nodes
-n=length(C); 
+n=length(C);
 
 % number of communities
 N=max(C);
@@ -27,7 +30,7 @@ P=NaN(n,N);
 
 % going over each node
 for i=1:n
-    neighbors=find(A(i,:));    
+    neighbors=find(A(i,:));
     D(i,:)=histc(C(neighbors),1:N);
     %participation vector
     P(i,:)=D(i,:);
@@ -38,7 +41,7 @@ for i=1:n
         size_com_relativ(C(i))=size_com_relativ(C(i))-1;
     end
     P(i,:)=P(i,:)./size_com_relativ';
-    
+
     % delete unused communities partitioning
     P(i,isnan(P(i,:)))=0;
     % normalize
@@ -46,7 +49,7 @@ for i=1:n
         % if all empty no normalization!
         P(i,:)=P(i,:);
     else
-        P(i,:)=P(i,:)/sum(P(i,:)); 
+        P(i,:)=P(i,:)/sum(P(i,:));
     end
 end
 
@@ -58,4 +61,3 @@ end
 
 
 end
-

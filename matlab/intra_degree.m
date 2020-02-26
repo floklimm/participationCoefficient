@@ -6,6 +6,9 @@ function [ intra_com_degree ] = intra_degree( D,C )
 %   OUTPUT:
 %           intra_com_degree - vector with intra community degree for each
 %           node
+%
+% Klimm, F. et al.: Individual nodeʼs contribution to the mesoscale of complex networks.
+% New Journal of Physics, 16(12), 125006.
 
 % n nodes and N communities
 [n,N]=size(D);
@@ -21,4 +24,3 @@ end
 
 
 end
-

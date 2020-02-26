@@ -1,12 +1,15 @@
 function [ p,pd ] = participation_index( P )
 %participation_index Returns participation index and dispersion
-%   Input: 
+%   Input:
 %           P - Participation matrix from function participation_matrix
 %   Output:
 %           p  - participation index
 %           pd - dispersion index (a node centric version of participation)
 %
 % Florian Klimm Oxford/HU Berlin 2014/15
+%
+% Klimm, F. et al.: Individual nodeʼs contribution to the mesoscale of complex networks.
+% New Journal of Physics, 16(12), 125006.
 
 % n nodes and N communities
 [n,N]=size(P);
@@ -33,11 +36,11 @@ else
             p(i)=1-prefactor*std(P(i,:),1);
         end
         % node centric dispersion
-    
+
         connected_com=find(P(i,:));
         % number connected communities
         N_prime=length(connected_com);
-        
+
         if N_prime==1
             pd(i)=0;
         elseif N_prime==0
@@ -45,11 +48,10 @@ else
         else
             pd(i)=1-(N_prime/sqrt(N_prime-1))*std(P(i,connected_com),1);
         end
-    
+
     end
 end
 
 
 
 end
-
